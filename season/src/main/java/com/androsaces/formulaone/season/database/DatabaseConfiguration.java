@@ -10,7 +10,7 @@ package com.androsaces.formulaone.season.database;
  *
  * @author Andrew Kearney
  */
-public interface DatabaseConnectionProperties {
+public interface DatabaseConfiguration {
     /**
      * Returns a string representation of the database connection URL
      */
@@ -58,7 +58,7 @@ public interface DatabaseConnectionProperties {
      */
     boolean isAuthenticationRequired();
 
-    DatabaseConnectionProperties NULL = new DatabaseConnectionProperties() {
+    DatabaseConfiguration NULL = new DatabaseConfiguration() {
         @Override public String getUrl() { return "NULL"; }
         @Override public void setUrl(String url) { }
         @Override public String getDriver() { return "NULL"; }
@@ -67,6 +67,6 @@ public interface DatabaseConnectionProperties {
         @Override public String getPassword() { return "NULL"; }
         @Override public void setPassword(String password) { }
         @Override public boolean isAuthenticationRequired() { return true; }
-        @Override public String toString() { return DatabaseConnectionProperties.class.getSimpleName().concat(".NULL"); }
+        @Override public String toString() { return DatabaseConfiguration.class.getSimpleName().concat(".NULL"); }
     };
 }

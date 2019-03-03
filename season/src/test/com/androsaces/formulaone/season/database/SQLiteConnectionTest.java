@@ -9,16 +9,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit test for {@link SQLiteConnectionProperties} class.
+ * Unit test for {@link SQLiteConfiguration} class.
  *
  * @author Andrew Kearney
  */
-class SQLiteConnectionPropertiesTest {
+class SQLiteConnectionTest {
     @Test
     @DisplayName("The connection URL cannot be null")
     void urlCannotBeNull() {
         assertThrows(IllegalArgumentException.class, () -> {
-            SQLiteConnectionProperties properties = new SQLiteConnectionProperties();
+            SQLiteConfiguration properties = new SQLiteConfiguration();
             properties.setUrl(null);
         });
     }
@@ -27,11 +27,11 @@ class SQLiteConnectionPropertiesTest {
     @DisplayName("The connection URL cannot be an empty string")
     void urlCannotBeEmpty() {
         assertAll(() -> assertThrows(IllegalArgumentException.class, () -> {
-                SQLiteConnectionProperties properties = new SQLiteConnectionProperties();
+                SQLiteConfiguration properties = new SQLiteConfiguration();
                 properties.setUrl("");
             }),
             () -> assertThrows(IllegalArgumentException.class, () -> {
-                SQLiteConnectionProperties properties = new SQLiteConnectionProperties();
+                SQLiteConfiguration properties = new SQLiteConfiguration();
                 properties.setUrl("  ");
             })
         );
@@ -40,7 +40,7 @@ class SQLiteConnectionPropertiesTest {
     @Test
     @DisplayName("The connection URL should start must start with JDBC")
     void urlMustStartWithJdbc() {
-        SQLiteConnectionProperties properties = new SQLiteConnectionProperties();
+        SQLiteConfiguration properties = new SQLiteConfiguration();
         properties.setUrl("/database/path/database_name.sql");
         assertTrue(properties.getUrl().startsWith("jdbc:sqlite:"));
     }
@@ -48,7 +48,7 @@ class SQLiteConnectionPropertiesTest {
     @Test
     @DisplayName("The connection URL should start must contain with sqlite")
     void urlMustContainWithSqlite() {
-        SQLiteConnectionProperties properties = new SQLiteConnectionProperties();
+        SQLiteConfiguration properties = new SQLiteConfiguration();
         properties.setUrl("jdbc:/database/path/database_name.sql");
         assertTrue(properties.getUrl().contains("sqlite"));
     }
@@ -56,7 +56,7 @@ class SQLiteConnectionPropertiesTest {
     @Test
     @DisplayName("If the connection URL does not start with jdbc.sqlite, it should be appended")
     void urlMustStartWithJdbcSqlite() {
-        SQLiteConnectionProperties properties = new SQLiteConnectionProperties();
+        SQLiteConfiguration properties = new SQLiteConfiguration();
         properties.setUrl("/database/path/database_name.sql");
         assertEquals("jdbc:sqlite:/database/path/database_name.sql", properties.getUrl());
     }

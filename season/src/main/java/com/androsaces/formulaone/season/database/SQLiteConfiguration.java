@@ -11,7 +11,7 @@ import com.androsaces.buckaroo.Params;
  *
  * @author Andrew Kearney
  */
-public class SQLiteConnectionProperties implements DatabaseConnectionProperties {
+public class SQLiteConfiguration implements DatabaseConfiguration {
     private String mUrl = "jdbc:sqlite:";
     private String mDriver = "org.sqlite.JDBC";
     private String mUsername = null;
@@ -74,7 +74,7 @@ public class SQLiteConnectionProperties implements DatabaseConnectionProperties 
 
     @Override
     public String toString() {
-        return "SQLiteConnectionProperties{" +
+        return "SQLiteConfiguration{" +
             "mUrl='" + mUrl + '\'' +
             ", mDriver='" + mDriver + '\'' +
             ", isAuthenticationRequired=" + isAuthenticationRequired +
