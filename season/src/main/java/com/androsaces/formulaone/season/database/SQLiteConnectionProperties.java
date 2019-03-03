@@ -4,6 +4,8 @@
 
 package com.androsaces.formulaone.season.database;
 
+import com.androsaces.buckaroo.Params;
+
 /**
  * An SQLite implementation of connection properties for a database.
  *
@@ -12,8 +14,8 @@ package com.androsaces.formulaone.season.database;
 public class SQLiteConnectionProperties implements DatabaseConnectionProperties {
     private String mUrl = "jdbc:sqlite:";
     private String mDriver = "org.sqlite.JDBC";
-    private String mUsername = "";
-    private String mPassword = "";
+    private String mUsername = null;
+    private String mPassword = null;
     private boolean isAuthenticationRequired = false;
 
     @Override
@@ -22,7 +24,16 @@ public class SQLiteConnectionProperties implements DatabaseConnectionProperties 
     }
 
     public void setUrl(String url) {
-        mUrl = url;
+        Params.notEmpty(url);
+        if (!urlStartsWith(url)) {
+            mUrl = mUrl.concat(url);
+        } else if (urlStartsWith(url)){
+            mUrl = url;
+        }
+    }
+
+    private boolean urlStartsWith(String url) {
+        return url.startsWith("jdbc.sqlite");
     }
 
     @Override
