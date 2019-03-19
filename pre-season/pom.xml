@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -11,18 +11,27 @@
     </parent>
 
     <groupId>com.androsaces.formula-one</groupId>
-    <artifactId>season</artifactId>
+    <artifactId>pre-season</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Season</name>
+    <name>Pre-season</name>
 
     <dependencies>
+        <!-- Project libraries -->
+        <dependency>
+            <groupId>com.androsaces.formula-one</groupId>
+            <artifactId>hq</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Internal libraries -->
         <dependency>
             <groupId>com.androsaces.tools</groupId>
             <artifactId>buckaroo</artifactId>
         </dependency>
 
+        <!-- External libraries -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
@@ -32,6 +41,7 @@
             <artifactId>sqlite-jdbc</artifactId>
         </dependency>
 
+        <!-- Logging libraries -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -41,20 +51,18 @@
             <artifactId>log4j-slf4j18-impl</artifactId>
         </dependency>
 
+        <!-- Testing libraries -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
