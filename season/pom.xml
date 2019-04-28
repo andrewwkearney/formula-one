@@ -19,6 +19,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.androsaces.formula-one</groupId>
+            <artifactId>hq</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.androsaces.tools</groupId>
             <artifactId>buckaroo</artifactId>
         </dependency>

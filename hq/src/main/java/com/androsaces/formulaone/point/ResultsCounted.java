@@ -15,5 +15,25 @@ public enum ResultsCounted {
     /**
      * Points counted in all races of the season.
      */
-    ALL
+    ALL,
+
+    /**
+     * Best 4 results counted.
+     */
+    BEST_FOUR,
+
+    /**
+     * Best 5 results counted.
+     */
+    BEST_FIVE,
+
+    /**
+     * Best 6 results counted.
+     */
+    BEST_SIX,
+
+    /**
+     * No results counted.
+     */
+    NONE
 }
