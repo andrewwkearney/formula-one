@@ -1,25 +1,23 @@
 package com.androsaces.formulaone.point;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit test for {@link TwentyFivePoints} class.
+ * Unit test for {@link TopTenFastestLap} class.
  *
  * @author Andrew Kearney
  */
-class TwentyFivePointsTest {
+class TopTenAndFastestLapTest {
     @Test
     @DisplayName("Exception thrown for negative position")
     void exceptionForNegativePosition() {
-        IllegalArgumentException pilotException = assertThrows(IllegalArgumentException.class, () -> new TwentyFivePoints().getPilotPointsAwarded(-1));
+        IllegalArgumentException pilotException = assertThrows(IllegalArgumentException.class, () -> new TopTenFastestLap().getPilotPointsAwarded(-1));
         assertEquals("parameter -1 cannot be less than zero", pilotException.getMessage());
 
-        IllegalArgumentException constructorException = assertThrows(IllegalArgumentException.class, () -> new TwentyFivePoints().getConstructorPointsAwarded(-1));
+        IllegalArgumentException constructorException = assertThrows(IllegalArgumentException.class, () -> new TopTenFastestLap().getConstructorPointsAwarded(-1));
         assertEquals("parameter -1 cannot be less than zero", constructorException.getMessage());
 
     }
@@ -27,7 +25,7 @@ class TwentyFivePointsTest {
     @Test
     @DisplayName("Correct points awarded for each driver position")
     void correctPilotPointsAwarded() {
-        TwentyFivePoints pointsSystem = new TwentyFivePoints();
+        ScoringSystem pointsSystem = new TopTenFastestLap();
 
         assertAll("correct_points",
             () -> assertEquals(25, pointsSystem.getPilotPointsAwarded(1)),
@@ -56,7 +54,7 @@ class TwentyFivePointsTest {
     @Test
     @DisplayName("Correct points awarded for each constructor position")
     void correctConstructorPointsAwarded() {
-        TwentyFivePoints pointsSystem = new TwentyFivePoints();
+        ScoringSystem pointsSystem = new TopTenFastestLap();
 
         assertAll("correct_points",
             () -> assertEquals(25, pointsSystem.getConstructorPointsAwarded(1)),
@@ -85,12 +83,13 @@ class TwentyFivePointsTest {
     @Test
     @DisplayName("Fastest lap returned")
     void correctFastestLap() {
-        assertEquals(FastestLap.NOT_AWARDED, new TwentyFivePoints().getFastestLap());
+        assertEquals(FastestLap.AWARDED_TOP_TEN, new TopTenFastestLap().getFastestLap());
     }
 
     @Test
     @DisplayName("Pole position returned")
     void correctPolePosition() {
-        assertEquals(PolePosition.NOT_AWARDED, new TwentyFivePoints().getPolePosition());
+        assertEquals(PolePosition.NOT_AWARDED, new TopTenFastestLap().getPolePosition());
     }
+
 }

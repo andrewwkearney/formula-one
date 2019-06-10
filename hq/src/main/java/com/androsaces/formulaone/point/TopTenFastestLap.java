@@ -22,13 +22,13 @@ import java.util.Objects;
  * @see ResultsCounted
  * @since 1.0
  */
-public class TwentyFivePointsAndFastestLap implements ScoringSystem {
+public class TopTenFastestLap implements ScoringSystem {
     private final FastestLap mFastestLap = FastestLap.AWARDED_TOP_TEN;
     private final PolePosition mPolePosition = PolePosition.NOT_AWARDED;
     private final ResultsCounted mPilotResultsCounted = ResultsCounted.ALL;
     private final ResultsCounted mConstructorResultsCounted = ResultsCounted.ALL;
-    private final int[] mPilotPoints = new int[]{25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
-    private final int[] mConstructorPoints = new int[]{25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
+    private final int[] mPilotPoints = PointsAllocation.getTopTen();
+    private final int[] mConstructorPoints = PointsAllocation.getTopTen();
 
     @Override
     public FastestLap getFastestLap() {
@@ -65,8 +65,8 @@ public class TwentyFivePointsAndFastestLap implements ScoringSystem {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TwentyFivePointsAndFastestLap)) return false;
-        TwentyFivePointsAndFastestLap that = (TwentyFivePointsAndFastestLap) o;
+        if (!(o instanceof TopTenFastestLap)) return false;
+        TopTenFastestLap that = (TopTenFastestLap) o;
         return mFastestLap == that.mFastestLap &&
             mPilotResultsCounted == that.mPilotResultsCounted &&
             mConstructorResultsCounted == that.mConstructorResultsCounted &&
@@ -84,7 +84,7 @@ public class TwentyFivePointsAndFastestLap implements ScoringSystem {
 
     @Override
     public String toString() {
-        return "TwentyFivePointsAndFastestLap{" +
+        return "TopTenFastestLap{" +
             "fastestLap=" + mFastestLap +
             ", polePosition=" + mPolePosition +
             ", pilotResultsCounted=" + mPilotResultsCounted +

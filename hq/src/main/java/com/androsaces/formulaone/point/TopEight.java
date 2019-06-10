@@ -5,29 +5,31 @@
 package com.androsaces.formulaone.point;
 
 import com.androsaces.buckaroo.Params;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * This points scoring system was used from 2010 until 2018, where points were
- * awarded to the top ten finishers in all races of the season, with the race
- * winner receiving 25 driver and constructor points down to the 10th place
- * finisher receiving 1 driver and constructor point. No points were awarded
- * to the pole position or fastest lap holder.
+ * This points scoring system was used from 2003 until 2009, where points were
+ * awarded to the top eight finishers in all races of the season, with the race
+ * winner receiving 10 driver and constructor points down to the eighth place
+ * finisher receiving 1 driver and constructor point. No points were awarded to
+ * the pole position or fastest lap holder.
  *
  * @author Andrew Kearney
  * @see FastestLap
+ * @see PointsAllocation
  * @see PolePosition
  * @see ResultsCounted
  * @since 1.0
  */
-public class TwentyFivePoints implements ScoringSystem {
+public class TopEight implements ScoringSystem {
     private final FastestLap mFastestLap = FastestLap.NOT_AWARDED;
     private final PolePosition mPolePosition = PolePosition.NOT_AWARDED;
     private final ResultsCounted mPilotResultsCounted = ResultsCounted.ALL;
     private final ResultsCounted mConstructorResultsCounted = ResultsCounted.ALL;
-    private final int[] mPilotPoints = new int[]{25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
-    private final int[] mConstructorPoints = new int[]{25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
+    private final int[] mPilotPoints = PointsAllocation.getTopEight();
+    private final int[] mConstructorPoints = PointsAllocation.getTopEight();
 
     @Override
     public FastestLap getFastestLap() {
@@ -40,7 +42,6 @@ public class TwentyFivePoints implements ScoringSystem {
     }
 
     @Override
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public int getPilotPointsAwarded(int position) {
         Params.notNegative(position);
         if (position > mPilotPoints.length) {
@@ -51,7 +52,6 @@ public class TwentyFivePoints implements ScoringSystem {
     }
 
     @Override
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public int getConstructorPointsAwarded(int position) {
         Params.notNegative(position);
         if (position > mConstructorPoints.length) {
@@ -64,18 +64,19 @@ public class TwentyFivePoints implements ScoringSystem {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TwentyFivePoints)) return false;
-        TwentyFivePoints that = (TwentyFivePoints) o;
-        return mFastestLap == that.mFastestLap &&
-            mPilotResultsCounted == that.mPilotResultsCounted &&
-            mConstructorResultsCounted == that.mConstructorResultsCounted &&
-            Arrays.equals(mPilotPoints, that.mPilotPoints) &&
-            Arrays.equals(mConstructorPoints, that.mConstructorPoints);
+        if (o == null || getClass() != o.getClass()) return false;
+        TopEight topEight = (TopEight) o;
+        return mFastestLap == topEight.mFastestLap &&
+                mPolePosition == topEight.mPolePosition &&
+                mPilotResultsCounted == topEight.mPilotResultsCounted &&
+                mConstructorResultsCounted == topEight.mConstructorResultsCounted &&
+                Arrays.equals(mPilotPoints, topEight.mPilotPoints) &&
+                Arrays.equals(mConstructorPoints, topEight.mConstructorPoints);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(mFastestLap, mPilotResultsCounted, mConstructorResultsCounted);
+        int result = Objects.hash(mFastestLap, mPolePosition, mPilotResultsCounted, mConstructorResultsCounted);
         result = 31 * result + Arrays.hashCode(mPilotPoints);
         result = 31 * result + Arrays.hashCode(mConstructorPoints);
         return result;
@@ -83,13 +84,13 @@ public class TwentyFivePoints implements ScoringSystem {
 
     @Override
     public String toString() {
-        return "TwentyFivePoints{" +
-            "fastestLap=" + mFastestLap +
-            ", polePosition=" + mPolePosition +
-            ", pilotResultsCounted=" + mPilotResultsCounted +
-            ", constructorResultsCounted=" + mConstructorResultsCounted +
-            ", pilotPointsAwardDownTo=" + mPilotPoints.length +
-            ", constructorPointsAwardDownTo=" + mConstructorPoints.length +
-            '}';
+        return "TopEight{" +
+                "fastestLap=" + mFastestLap +
+                ", polePosition=" + mPolePosition +
+                ", pilotResultsCounted=" + mPilotResultsCounted +
+                ", constructorResultsCounted=" + mConstructorResultsCounted +
+                ", pilotPoints=" + mPilotPoints.length +
+                ", constructorPoints=" + mConstructorPoints.length +
+                '}';
     }
 }

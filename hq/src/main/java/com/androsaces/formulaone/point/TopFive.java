@@ -8,20 +8,25 @@ import com.androsaces.buckaroo.EmptyArrays;
 import com.androsaces.buckaroo.Params;
 
 /**
+ * This points scoring system was used from the start of the championship until
+ * 1953. Points were awarded to the top five finishers, while their four best
+ * results counted in the drivers championship, no points were awarded to
+ * constructors. One point was awarded for pole position.
+ *
  * @author Andrew Kearney
+ * @see FastestLap
+ * @see PointsAllocation
+ * @see PolePosition
+ * @see ResultsCounted
+ * @since 1.0
  */
-public class EightPoints implements ScoringSystem {
-    private final FastestLap mFastestLap = FastestLap.AWARDED;
+public abstract class TopFive implements ScoringSystem {
     private final PolePosition mPolePosition = PolePosition.NOT_AWARDED;
-    private final ResultsCounted mPilotResultsCounted = ResultsCounted.BEST_FOUR;
-    private final ResultsCounted mConstructorResultsCounted = ResultsCounted.NONE;
-    private final int[] mPilotPoints = new int[]{8, 6, 4, 3, 2};
+    private final int[] mPilotPoints = PointsAllocation.getTopFive();
     private final int[] mConstructorPoints = EmptyArrays.EMPTY_INT_ARRAY;
 
     @Override
-    public FastestLap getFastestLap() {
-        return mFastestLap;
-    }
+    public abstract FastestLap getFastestLap();
 
     @Override
     public PolePosition getPolePosition() {
@@ -41,6 +46,6 @@ public class EightPoints implements ScoringSystem {
 
     @Override
     public int getConstructorPointsAwarded(int position) {
-        return 0;
+        return mConstructorPoints.length;
     }
 }

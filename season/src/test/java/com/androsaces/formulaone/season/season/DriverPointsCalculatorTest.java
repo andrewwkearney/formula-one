@@ -1,6 +1,7 @@
 package com.androsaces.formulaone.season.season;
 
-import com.androsaces.formulaone.point.TwentyFivePoints;
+import com.androsaces.formulaone.point.TopTen;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 class DriverPointsCalculatorTest {
     private static final Logger logger = LoggerFactory.getLogger(DriverPointsCalculatorTest.class);
-    private DriverPointsCalculator mCalculator = new DriverPointsCalculator(new TwentyFivePoints());
+    private DriverPointsCalculator mCalculator = new DriverPointsCalculator(new TopTen());
     private Map<String, String> mDriverDetails = createDriverMap();
 
     @Test
