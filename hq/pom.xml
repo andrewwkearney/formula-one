@@ -16,6 +16,7 @@
     <packaging>jar</packaging>
 
     <name>HQ</name>
+    <description>The Formula 1 API</description>
 
     <dependencies>
         <dependency>
