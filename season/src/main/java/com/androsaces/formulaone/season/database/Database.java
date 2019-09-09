@@ -12,22 +12,17 @@ import java.sql.Connection;
 public interface Database {
     void start();
 
+    void stop();
+
+    boolean isRunning();
+
     Connection getConnection();
 
     Database NULL = new Database() {
-        @Override
-        public void start() {
-
-        }
-
-        @Override
-        public Connection getConnection() {
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return Database.class.getSimpleName().concat(".NULL");
-        }
+        @Override public void start() {}
+        @Override public void stop() {}
+        @Override public boolean isRunning() { return false; }
+        @Override public Connection getConnection() { return null; }
+        @Override public String toString() { return Database.class.getSimpleName().concat(".NULL"); }
     };
 }
