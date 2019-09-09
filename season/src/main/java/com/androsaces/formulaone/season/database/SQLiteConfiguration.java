@@ -25,24 +25,12 @@ public class SQLiteConfiguration implements DatabaseConfiguration {
 
     public void setUrl(String url) {
         Params.notEmpty(url);
-        if (!urlStartsWith(url)) {
-            mUrl = mUrl.concat(url);
-        } else if (urlStartsWith(url)){
-            mUrl = url;
-        }
-    }
-
-    private boolean urlStartsWith(String url) {
-        return url.startsWith("jdbc.sqlite");
+        mUrl = url;
     }
 
     @Override
     public String getDriver() {
         return mDriver;
-    }
-
-    public void setDriver(String driver) {
-        mDriver = driver;
     }
 
     @Override
