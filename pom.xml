@@ -10,6 +10,7 @@
 
     <modules>
         <module>hq</module>
+        <module>pre-season</module>
         <module>season</module>
     </modules>
 
