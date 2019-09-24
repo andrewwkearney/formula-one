@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.androsaces.application</groupId>
         <artifactId>formula-one</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>com.androsaces.formula-one</groupId>
