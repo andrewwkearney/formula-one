@@ -15,7 +15,7 @@ public class LapTime {
     private final long mLapTime;
     private final String mLapTimeString;
 
-    LapTime(long lapTime) {
+    public LapTime(long lapTime) {
         mLapTime = Params.notNegative(lapTime);
         mLapTimeString = LapTimeConstructor.getLapTimeAsString(lapTime);
     }
