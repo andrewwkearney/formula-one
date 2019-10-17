@@ -2,10 +2,13 @@
  * @author Andrew Kearney
  */
 module season {
-    requires org.slf4j;
     requires com.androsaces.buckaroo;
+    requires hq;
     requires java.sql;
+    requires javafx.base;
     requires javafx.controls;
     requires javafx.graphics;
-    requires hq;
+    requires org.slf4j;
+
+    opens com.androsaces.formulaone.season.ui to javafx.graphics;
 }
