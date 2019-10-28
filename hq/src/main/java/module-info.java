@@ -1,4 +1,4 @@
-module hq {
+module com.androsaces.formulaone.hq {
     requires org.slf4j;
     requires com.androsaces.buckaroo;
 
