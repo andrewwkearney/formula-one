@@ -9,15 +9,15 @@ import com.androsaces.formulaone.season.database.DatabaseConfiguration;
 import com.androsaces.formulaone.season.database.SQLiteConfiguration;
 import com.androsaces.formulaone.season.database.SeasonDatabase;
 import java.sql.Connection;
-import javafx.application.Application;
-import javafx.stage.Stage;
+// import javafx.application.Application;
+// import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author Andrew Kearney
  */
-public class FormulaOne extends Application {
+public class FormulaOne { // extends Application {
     private static final Logger logger = LoggerFactory.getLogger(FormulaOne.class);
 
     private Database mSeasonDatabase;
@@ -29,7 +29,7 @@ public class FormulaOne extends Application {
             formulaOne.configure();
 
             formulaOne.startApplication();
-            launch(args);
+            // launch(args);
         } catch (Exception e) {
             printUsage(e);
         }
@@ -51,7 +51,7 @@ public class FormulaOne extends Application {
         Connection connection = mSeasonDatabase.getConnection(); //DriverManager.getConnection(mConfiguration.getUrl());
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    }
+    // @Override
+    // public void start(Stage primaryStage) throws Exception {
+    // }
 }

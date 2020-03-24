@@ -4,8 +4,23 @@
 
 package com.androsaces.formulaone.document;
 
-public interface FIADocument {
+import com.androsaces.buckaroo.annotation.NotNull;
+
+public interface FIADocument<T> {
+
+    T getDocument();
+
+    void setDocument(@NotNull T t);
 
     FIADocument NULL = new FIADocument() {
+        @Override
+        public Object getDocument() {
+            return null;
+        }
+
+        @Override
+        public void setDocument(Object o) {
+
+        }
     };
 }
