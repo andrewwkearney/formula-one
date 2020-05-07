@@ -2,7 +2,7 @@
  * Copyright (c) 2020. Androsaces. All rights reserved.
  */
 
-package com.androsaces.formulaone.parser;
+package com.androsaces.formulaone.preseason.parser;
 
 import com.androsaces.buckaroo.annotation.NotNull;
 import com.androsaces.formulaone.document.FIADocument;
