@@ -11,31 +11,29 @@ import com.androsaces.buckaroo.Params;
  *
  * @author Andrew Kearney
  */
-public class LapTime {
+public class LapTime implements Time {
     private final long mLapTime;
     private final String mLapTimeString;
 
     LapTime(long lapTime) {
         mLapTime = Params.notNegative(lapTime);
-        mLapTimeString = LapTimeConstructor.getLapTimeAsString(lapTime);
+        mLapTimeString = longToString(lapTime);
     }
 
-    public long getLapTime() {
+    @Override
+    public long getTime() {
         return mLapTime;
     }
 
-    public String getLapTimeAsString() {
+    @Override
+    public String getTimeString() {
         return mLapTimeString;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         LapTime that = (LapTime) o;
         return this.mLapTime == that.mLapTime;
     }
@@ -46,19 +44,22 @@ public class LapTime {
     }
 
     @Override
-    public String toString() {
-        return "LapTime{" + mLapTimeString + '}';
+    public int compareTo(Time o) {
+        return (int) (mLapTime - o.getTime());
     }
 
-    private static class LapTimeConstructor {
-        private static String getLapTimeAsString(long time) {
-            if (time == 0L) return "0:00.000";
-            int minute = (int) (time / 60000);
-            time = time % 60000;
-            int second = (int) time / 1000;
-            time = time % 1000;
-            int milli = (int) time;
-            return String.format("%1d:%02d.%03d", minute, second, milli);
-        }
+    @Override
+    public String toString() {
+        return mLapTimeString;
+    }
+
+    private static String longToString(long time) {
+        if (time == 0L) return "0:00.000";
+        int minute = (int) (time / 60000);
+        time = time % 60000;
+        int second = (int) time / 1000;
+        time = time % 1000;
+        int milli = (int) time;
+        return String.format("%1d:%02d.%03d", minute, second, milli);
     }
 }
