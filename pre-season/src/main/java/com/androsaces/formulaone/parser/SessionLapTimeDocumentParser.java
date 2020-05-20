@@ -1,35 +1,17 @@
 package com.androsaces.formulaone.parser;
 
-import com.androsaces.formulaone.document.FIADocument;
 import com.androsaces.formulaone.time.LapTime;
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
 import java.util.Map;
 import java.util.Objects;
 
 /**
  * @author Andrew Kearney
  */
-public class SessionLapTimeDocumentParser implements DocumentParser {
+public class SessionLapTimeDocumentParser {
     private static final Logger log = LoggerFactory.getLogger(SessionLapTimeDocumentParser.class);
-
-    @Override
-    public PDDocument load(InputStream inputStream) {
-        return null;
-    }
-
-    @Override
-    public PDDocument load(String fileName) {
-        return null;
-    }
-
-    @Override
-    public FIADocument parse(PDDocument document) {
-        return null;
-    }
 
     public Map<String, LapTime> memoiseLapTime(String inputString) {
         int position = 0;
