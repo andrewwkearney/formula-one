@@ -19,6 +19,13 @@ class LapTimeTest {
     }
 
     @Test
+    @DisplayName("Lap time string parameter cannot be null")
+    void cannotHaveNullLapTimeString() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new LapTime(null));
+        assertEquals("lapTime cannot be null", exception.getMessage());
+    }
+
+    @Test
     @DisplayName("Creating lap times and lap time as string")
     void testGetLapTime() {
         assertAll("lap time string",
@@ -44,6 +51,35 @@ class LapTimeTest {
             () -> assertEquals("1:25.836", new LapTime(85836L).getTimeString()),
             () -> assertEquals("2:03.957", new LapTime(123957L).getTimeString()),
             () -> assertEquals("21:07.534", new LapTime(1267534L).getTimeString())
+        );
+    }
+
+    @Test
+    @DisplayName("")
+    void testGetLapTimeCreatedFromString() {
+        assertAll("lap time string",
+            () -> assertEquals(new LapTime("0:00.000").getTime(), 0L),
+            () -> assertEquals(new LapTime("0:00.001").getTime(), 1L),
+            () -> assertEquals(new LapTime("0:00.010").getTime(), 10L),
+            () -> assertEquals(new LapTime("0:00.100").getTime(), 100L),
+            () -> assertEquals(new LapTime("0:00.200").getTime(), 200L),
+            () -> assertEquals(new LapTime("0:00.225").getTime(), 225L),
+            () -> assertEquals(new LapTime("0:00.250").getTime(), 250L),
+            () -> assertEquals(new LapTime("0:00.275").getTime(), 275L),
+            () -> assertEquals(new LapTime("0:01.000").getTime(), 1000L),
+            () -> assertEquals(new LapTime("0:01.001").getTime(), 1001L),
+            () -> assertEquals(new LapTime("0:01.002").getTime(), 1002L),
+            () -> assertEquals(new LapTime("0:01.010").getTime(), 1010L),
+            () -> assertEquals(new LapTime("0:01.100").getTime(), 1100L),
+            () -> assertEquals(new LapTime("0:01.200").getTime(), 1200L),
+            () -> assertEquals(new LapTime("0:01.400").getTime(), 1400L),
+            () -> assertEquals(new LapTime("0:01.600").getTime(), 1600L),
+            () -> assertEquals(new LapTime("0:01.800").getTime(), 1800L),
+            () -> assertEquals(new LapTime("0:02.000").getTime(), 2000L),
+            () -> assertEquals(new LapTime("1:23.644").getTime(), 83644L),
+            () -> assertEquals(new LapTime("1:25.836").getTime(), 85836L),
+            () -> assertEquals(new LapTime("2:03.957").getTime(), 123957L),
+            () -> assertEquals(new LapTime("21:07.534").getTime(), 1267534L)
         );
     }
 }

@@ -5,6 +5,7 @@
 package com.androsaces.formulaone.time;
 
 import com.androsaces.buckaroo.Params;
+import com.androsaces.buckaroo.annotation.NotNull;
 
 /**
  * Represents a lap time that can be set by a pilot within an active Formula 1 session.
@@ -15,9 +16,26 @@ public class LapTime implements Time {
     private final long mLapTime;
     private final String mLapTimeString;
 
-    LapTime(long lapTime) {
+    /**
+     * Creates a new instance of a lap time where the provided long is the number
+     * of milliseconds the lap took to complete.
+     *
+     * @param lapTime the lap time in milliseconds
+     */
+    public LapTime(long lapTime) {
         mLapTime = Params.notNegative(lapTime);
         mLapTimeString = longToString(lapTime);
+    }
+
+    /**
+     * Creates a new instance of a lap time where the provided string is in the
+     * format of m:ss.sss.
+     *
+     * @param lapTime the lap time as a string
+     */
+    public LapTime(@NotNull String lapTime) {
+        mLapTimeString = Params.notNull(lapTime, "lapTime");
+        mLapTime = stringToLong(lapTime);
     }
 
     @Override
@@ -61,5 +79,19 @@ public class LapTime implements Time {
         time = time % 1000;
         int milli = (int) time;
         return String.format("%1d:%02d.%03d", minute, second, milli);
+    }
+
+    private static long stringToLong(String lapTime) {
+        if ("0:00.000".equals(lapTime)) return 0L;
+        long time = 0L;
+        int colon = lapTime.indexOf(":");
+        int period = lapTime.indexOf(".");
+        int minute = Integer.parseInt(lapTime.substring(0, colon));
+        time = minute * 60000;
+        int second = Integer.parseInt(lapTime.substring(++colon, period));
+        time = time + (second * 1000);
+        int milli = Integer.parseInt(lapTime.substring(++period));
+        time = time + milli;
+        return time;
     }
 }
