@@ -21,10 +21,21 @@ class DepartsLaneTimeTest {
     void getTimeStringReturnsCorrectValues() {
         assertAll("departs lane time string",
             () -> assertEquals("00:00:00", new DepartsLaneTime(0L).getTimeString()),
-            () -> assertEquals("00:00:01", new DepartsLaneTime(1L).getTimeString()),
-            () -> assertEquals("12:00:00", new DepartsLaneTime(43200L).getTimeString()),
-            () -> assertEquals("12:00:59", new DepartsLaneTime(43259L).getTimeString()),
-            () -> assertEquals("12:01:00", new DepartsLaneTime(43260L).getTimeString())
+            () -> assertEquals("00:00:01", new DepartsLaneTime(1000L).getTimeString()),
+            () -> assertEquals("12:00:00", new DepartsLaneTime(43200000L).getTimeString()),
+            () -> assertEquals("12:00:59", new DepartsLaneTime(43259000L).getTimeString()),
+            () -> assertEquals("12:01:00", new DepartsLaneTime(43260000L).getTimeString())
+        );
+    }
+
+    @Test
+    @DisplayName("Creating departs lane time with string")
+    void getTimeReturnsCorrectValues() {
+        assertAll("departs lane time string",
+            () -> assertEquals(43200000L, new DepartsLaneTime("12:00:00").getTime()),
+            () -> assertEquals(43259000L, new DepartsLaneTime("12:00:59").getTime()),
+            () -> assertEquals(43260000L, new DepartsLaneTime("12:01:00").getTime()),
+            () -> assertEquals(43450000L, new DepartsLaneTime("12:04:10").getTime())
         );
     }
 

@@ -5,6 +5,9 @@
 package com.androsaces.formulaone.time;
 
 import com.androsaces.buckaroo.Params;
+import com.androsaces.buckaroo.config.UnitOfTime;
+
+import static com.androsaces.buckaroo.config.UnitOfTime.*;
 
 /**
  * Represents the first time that a pilot leaves the pit lane at the beginning of
@@ -19,6 +22,11 @@ public class DepartsLaneTime implements Time {
     DepartsLaneTime(long departLaneTime) {
         mDepartLaneTime = Params.notNegative(departLaneTime);
         mDepartLaneTimeString = longToString(departLaneTime);
+    }
+
+    public DepartsLaneTime(String departLaneTime) {
+        mDepartLaneTimeString = departLaneTime;
+        mDepartLaneTime = stringToLong(departLaneTime);
     }
 
     @Override
@@ -56,11 +64,26 @@ public class DepartsLaneTime implements Time {
 
     private static String longToString(long time) {
         if (time == 0L) return "00:00:00";
-        int hours = (int) time / 3600;
-        time = time % 3600;
-        int minutes = (int) time / 60;
-        time = time % 60;
-        int seconds = (int) time;
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        time = time / 1000;
+        int seconds = (int) time % 60;
+        time = time / 60;
+        int minutes = (int) time % 60;
+        time = time / 60;
+        return String.format("%02d:%02d:%02d", time, minutes, seconds);
+    }
+
+    private static long stringToLong(String stringTime) {
+        long time = 0L;
+        if ("00:00:00".equals(stringTime)) return time;
+        String[] split = stringTime.split(":");
+
+        time = Integer.parseInt(split[0]) * HOUR.getUnitOfTime();
+        time += Integer.parseInt(split[1]) * MINUTE.getUnitOfTime();
+        time += Integer.parseInt(split[2]) * SECOND.getUnitOfTime();
+        return time;
+    }
+
+    private static long reduce(long time, UnitOfTime unitOfTime) {
+        return time / unitOfTime.getUnitOfTime();
     }
 }
