@@ -1,6 +1,5 @@
 package com.androsaces.formulaone.parser;
 
-import com.androsaces.formulaone.time.LapTime;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -15,7 +14,8 @@ class SessionLapTimeDocumentParserTest {
                 returnFirstLapTime() +
                 returnSecondLapTime() +
                 returnThirdLapTime() +
-                returnFourthLapTime();
+                returnFourthLapTime() +
+                returnSecondDriverString();
         SessionLapTimeDocumentParser parser = new SessionLapTimeDocumentParser();
         Map<String, LapTime> actual = parser.memoiseLapTime(inputString);
 
@@ -23,6 +23,10 @@ class SessionLapTimeDocumentParserTest {
 
     private String returnDriverString() {
         return "3 Daniel Ricciardo\n";
+    }
+
+    private String returnSecondDriverString() {
+        return "4 Lando Norris\n";
     }
 
     private String returnFirstLapTime() {
@@ -38,6 +42,6 @@ class SessionLapTimeDocumentParserTest {
     }
 
     private String returnFourthLapTime() {
-        return "4 1:45.631";
+        return "4 1:45.631\n";
     }
 }
